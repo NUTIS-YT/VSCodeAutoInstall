@@ -1,0 +1,23 @@
+# VS Code Deployer configuration
+# Add Marketplace extension IDs to the list below.
+# Pin a version with "publisher.extension@version".
+
+[settings]
+editor = "code"
+continue_on_error = true
+skip_installed = true
+timeout_seconds = 600
+
+[extensions]
+list = [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "eamodio.gitlens",
+    "ms-vscode.cpptools",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "tamasfe.even-better-toml",
+    "usernamehw.errorlens",
+    "oderwat.indent-rainbow",
+    "gruntfuggly.todo-tree",
+]
