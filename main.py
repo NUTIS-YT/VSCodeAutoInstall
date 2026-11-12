@@ -39,7 +39,11 @@ from rich.text import Text
 
 APP_NAME = "VS Code Deployer"
 VERSION = "1.0.0"
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = (
+    Path(sys.executable).resolve().parent
+    if getattr(sys, "frozen", False)
+    else Path(__file__).resolve().parent
+)
 DEFAULT_CONFIG = BASE_DIR / "candidates.toml"
 LOG_DIR = BASE_DIR / "logs"
 EXPORT_DIR = BASE_DIR / "exports"
