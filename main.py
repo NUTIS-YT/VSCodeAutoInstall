@@ -254,11 +254,20 @@ def install_extensions(executable: str, config: dict[str, Any]) -> dict[str, int
 
             progress.update(task, description=f"[cyan]Установка: {item}")
             log.info("INSTALL START %s", item)
-            result = run_cli(
-                executable,
-                ["--install-extension", item],
-                timeout=config["timeout_seconds"],
-            )
+            try:
+                result = run_cli(
+                    executable,
+                    ["--install-extension", item],
+                    timeout=config["timeout_seconds"],
+                )
+            except DeployerError as exc:
+                stats["failed"] += 1
+                results.add_row(item, "[red]ERROR[/red]")
+                log.error("INSTALL ERROR %s: %s", item, exc)
+                progress.update(task, advance=1)
+                if not config["continue_on_error"]:
+                    break
+                continue
 
             if result.returncode == 0:
                 stats["installed"] += 1
